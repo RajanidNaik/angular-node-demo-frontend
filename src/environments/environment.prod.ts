@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'YOUR_PRODUCTION_API_URL',
-  backendUrl: 'https://your-backend-url.com'
+
+  apiUrl: 'https://angular-node-demo-backend.onrender.com/api',
+  backendUrl: 'https://angular-node-demo-backend.onrender.com'
 };
