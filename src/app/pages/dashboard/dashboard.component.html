@@ -1,0 +1,281 @@
+<div class="container">
+
+  <div class="app-card">
+
+    <h2 class="name">
+
+      Welcome {{ user.name }}
+
+    </h2>
+
+    <p>
+
+      Role :
+      <strong>
+
+        {{ user.role }}
+
+      </strong>
+
+    </p>
+
+  </div>
+
+  <br>
+
+<h2>Overall Statistics</h2>
+  <div class="dashboard-grid mob-stats">
+
+    <!-- HR Cards -->
+
+    <div
+      class="app-card">
+
+      <h3>Total Users</h3>
+
+      <h1>
+
+        {{ dashboard.totalUsers }}
+
+      </h1>
+
+    </div>
+        <div
+      class="app-card">
+
+      <h3>HR</h3>
+
+      <h1>
+
+        {{ dashboard.hr }}
+
+      </h1>
+
+    </div>
+
+    <div
+      class="app-card">
+
+      <h3>Managers</h3>
+
+      <h1>
+
+        {{ dashboard.managers }}
+
+      </h1>
+
+    </div>
+
+    <div
+      class="app-card">
+
+      <h3>Employees</h3>
+
+      <h1>
+
+        {{ dashboard.employees }}
+
+      </h1>
+
+    </div>
+
+    <!-- Common Cards -->
+
+    <div class="app-card">
+
+      <h3>Total Tasks</h3>
+
+      <h1>
+
+        {{ dashboard.totalTasks }}
+
+      </h1>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>Pending</h3>
+
+      <h1>
+
+        {{ dashboard.pendingTasks }}
+
+      </h1>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>In Progress</h3>
+
+      <h1>
+
+        {{ dashboard.inProgressTasks }}
+
+      </h1>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>Completed</h3>
+
+      <h1>
+
+        {{ dashboard.completedTasks }}
+
+      </h1>
+
+    </div>
+
+  </div>
+  <br>
+
+  <!-- Summary Cards -->
+   <h2>My Statistics</h2>
+
+  <div class="dashboard-grid mob-stats">
+
+  <!-- HR -->
+
+  <ng-container *ngIf="isHR">
+
+    <div class="app-card">
+
+      <h3>Users</h3>
+
+      <h2>{{ summary.users }}</h2>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>Customers</h3>
+
+      <h2>{{ summary.customers }}</h2>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>Tasks</h3>
+
+      <h2>{{ summary.tasks }}</h2>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>My Tasks</h3>
+
+      <h2>{{ summary.myTasks }}</h2>
+
+    </div>
+
+  </ng-container>
+
+  <!-- Manager -->
+
+  <ng-container *ngIf="isManager">
+
+    <div class="app-card">
+
+      <h3>Customers</h3>
+
+      <h2>{{ summary.customers }}</h2>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>Tasks</h3>
+
+      <h2>{{ summary.tasks }}</h2>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>My Tasks</h3>
+
+      <h2>{{ summary.myTasks }}</h2>
+
+    </div>
+
+  </ng-container>
+
+  <!-- Employee -->
+
+  <ng-container *ngIf="isEmployee">
+
+    <div class="app-card">
+
+      <h3>My Tasks</h3>
+
+      <h2>{{ summary.myTasks }}</h2>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>Pending</h3>
+
+      <h2>{{ summary.pending }}</h2>
+
+    </div>
+
+    <div class="app-card">
+
+      <h3>Completed</h3>
+
+      <h2>{{ summary.completed }}</h2>
+
+    </div>
+
+  </ng-container>
+
+</div>
+<br>
+
+<div>
+  <h2>Dashboard Analytics</h2>
+  <br>
+<div class="dashboard-grid">
+
+  <div class="app-card" *ngIf="chartSeries.length && user.role === 'HR'">
+
+    <app-charts
+      title="Users by Role"
+      type="pie"
+      [labels]="chartLabels"
+      [series]="chartSeries">
+    </app-charts>
+
+  </div>
+    <div class="app-card" *ngIf="chartSeries.length && user.role === 'Manager'">
+
+    <app-charts
+      title="Tasks list"
+      type="pie"
+      [labels]="chartLabels"
+      [series]="chartSeries">
+    </app-charts>
+
+  </div>
+
+  <div class="app-card" *ngIf="prioritySeries.length">
+
+    <app-charts
+      title="Tasks by Priority"
+      type="bar"
+      [labels]="priorityLabels"
+      [series]="prioritySeries">
+    </app-charts>
+
+  </div>
+
+</div>
+</div>
+
+</div>

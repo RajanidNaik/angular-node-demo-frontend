@@ -1,0 +1,134 @@
+<div class="ask-emi-page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+        Employee Experience
+        <span>/</span>
+        <strong>Ask EMI</strong>
+    </div>
+
+    <!-- Hero Section -->
+
+    <div class="hero">
+
+        <div class="hero-left">
+
+            <p class="tag">
+                AI WORKPLACE COMPANION
+            </p>
+
+            <h1>
+                Ask anything.
+                Feel supported.
+            </h1>
+
+            <p class="subtitle">
+                EMI brings together company knowledge, work tools, and human support.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Main Layout -->
+
+    <div class="content">
+
+        <!-- Chat -->
+
+        <div class="chat-card">
+
+            <div class="chat-body" #chatBody>
+
+                <!-- Bot -->
+
+                <div
+                    class="message bot"
+                    *ngFor="let msg of messages">
+
+                    <ng-container *ngIf="msg.type==='bot'">
+
+                        <div class="avatar">
+
+                            <img
+                                src="assets/images/bot.png"
+                                alt="">
+
+                        </div>
+
+                    </ng-container>
+
+                    <div
+                        class="bubble"
+                        [class.userBubble]="msg.type==='user'">
+
+                        {{msg.text}}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+
+            <div class="chat-footer">
+
+                <input
+                    [(ngModel)]="question"
+                    (keyup.enter)="sendMessage()"
+                    placeholder="Ask EMI anything about work...">
+
+                <button
+                    (click)="sendMessage()">
+
+                    ➜
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Right Panel -->
+
+        <div class="right-panel">
+
+            <div class="suggestion-card">
+
+                <h3>Try asking</h3>
+
+                <button
+                    *ngFor="let item of suggestions">
+
+                    {{item}}
+
+                </button>
+
+            </div>
+
+            <div class="privacy-card">
+
+                <span>
+                    Private by design
+                </span>
+
+                <h4>
+                    You're in control
+                </h4>
+
+                <p>
+
+                    EMI explains where answers come from
+                    and keeps wellbeing conversations private.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

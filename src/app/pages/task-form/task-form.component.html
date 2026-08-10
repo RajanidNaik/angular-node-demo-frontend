@@ -1,0 +1,127 @@
+<h2>
+
+  {{ task
+      ? 'Edit Task'
+      : 'Add Task' }}
+
+</h2>
+
+<form class="scroll" [formGroup]="taskForm">
+
+  <!-- Title -->
+  <div class="form-group">
+
+    <label>Title</label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter task title"
+      formControlName="title">
+
+  </div>
+
+  <!-- Description -->
+  <div class="form-group">
+
+    <label>Description</label>
+
+    <textarea formControlName="description" class="form-control"></textarea>
+
+  </div>
+
+  <!-- Priority -->
+  <div class="form-group">
+
+    <label>Priority</label>
+
+    <select formControlName="priority" class="form-control">
+
+      <option value="Low">Low</option>
+
+      <option value="Medium">Medium</option>
+
+      <option value="High">High</option>
+
+    </select>
+
+  </div>
+
+  <!-- Status -->
+  <div class="form-group">
+
+    <label>Status</label>
+
+    <select formControlName="status" class="form-control">
+
+      <option value="Pending">Pending</option>
+
+      <option value="In Progress">In Progress</option>
+
+      <option value="Completed">Completed</option>
+
+    </select>
+
+  </div>
+
+  <!-- Assigned To (UPDATED) -->
+<div class="form-group">
+
+  <label>Assign To</label>
+
+  <select formControlName="assignedTo" class="form-control">
+
+    <option value="">
+
+      Select Employee
+
+    </option>
+
+    <option
+      *ngFor="let emp of employees"
+      [value]="emp._id">
+
+      {{ emp.name }}
+
+    </option>
+
+  </select>
+
+</div>
+
+  <!-- Due Date -->
+  <div class="form-group">
+
+    <label>Due Date</label>
+
+    <input
+      type="date"
+      class="form-control"
+      formControlName="dueDate">
+
+  </div>
+
+  <br>
+
+  <!-- Buttons -->
+  <button
+    type="button"
+    class="btn-primary"
+    (click)="saveTask()">
+
+    Save
+
+  </button>
+
+  &nbsp;
+
+  <button
+    type="button"
+    class="btn-secondary"
+    (click)="cancel()">
+
+    Cancel
+
+  </button>
+
+</form>

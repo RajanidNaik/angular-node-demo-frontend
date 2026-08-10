@@ -1,0 +1,63 @@
+.profile-image {
+
+  position: relative;
+
+  width: 150px;
+
+  margin: auto;
+
+}
+
+.avatar {
+
+  width: 150px;
+
+  height: 150px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 4px solid #1976d2;
+
+}
+
+.camera-btn {
+
+  position: absolute;
+
+  bottom: 8px;
+
+  right: 8px;
+
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #1976d2;
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+
+  transition: .3s;
+
+}
+
+.camera-btn:hover {
+
+  background: #125ea8;
+
+  transform: scale(1.1);
+
+}

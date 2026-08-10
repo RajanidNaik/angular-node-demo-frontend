@@ -1,0 +1,48 @@
+.scroll {
+max-height: 320px;
+overflow-y: auto;
+height: 100%;
+padding-right: 6px;
+
+&::-webkit-scrollbar {
+  width: 5px;
+  -webkit-appearance: none;
+}
+&::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 8px;
+}
+}
+.form-group {
+  margin-bottom: 0px!important;
+
+}
+
+
+label {
+
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-weight: bold;
+
+}
+
+input {
+
+  width: 100%;
+
+  padding: 10px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 4px;
+
+}
+
+button {
+
+  margin-right: 10px;
+
+}

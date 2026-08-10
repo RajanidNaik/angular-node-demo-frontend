@@ -1,0 +1,170 @@
+<header class="header">
+
+  <!-- Hamburger (Mobile Only) -->
+  <button 
+    class="hamburger"
+    (click)="toggleMenu()">
+
+    <i class="fa-solid fa-bars"></i>
+
+  </button>
+
+
+  <!-- Logo -->
+
+  <a
+    routerLink="/dashboard"
+    class="logo">
+
+     <img
+        src="/assets/images/logo.png"
+        alt="Logo">
+
+  </a>
+
+
+  <!-- Navigation -->
+
+  <nav [class.mobile-open]="menuOpen">
+
+    <button 
+      class="close-menu"
+      (click)="toggleMenu()">
+
+      <i class="fa-solid fa-xmark"></i>
+
+    </button>
+
+
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      (click)="toggleMenu()">
+
+      Dashboard
+
+    </a>
+
+
+    <a
+      *ngIf="user.role === 'HR'"
+      routerLink="/users"
+      routerLinkActive="active"
+      (click)="toggleMenu()">
+
+      Users
+
+    </a>
+
+
+    <a
+      routerLink="/tasks"
+      routerLinkActive="active"
+      (click)="toggleMenu()">
+
+      Tasks
+
+    </a>
+
+
+    <a
+      routerLink="/customers"
+      routerLinkActive="active"
+      (click)="toggleMenu()">
+
+      Clients
+
+    </a>
+
+
+    <a
+      routerLink="/profile"
+      routerLinkActive="active"
+      (click)="toggleMenu()">
+
+      My Profile
+
+    </a>
+
+
+  </nav>
+
+
+  <!-- Overlay -->
+
+  <div 
+    class="overlay"
+    *ngIf="menuOpen"
+    (click)="toggleMenu()">
+
+  </div>
+
+
+
+  <!-- Notification -->
+
+  <div class="notification">
+
+    <button
+      (click)="showNotifications=!showNotifications">
+
+      <i class="fa-solid fa-bell"></i>
+
+      <span *ngIf="notifications.length">
+        {{notifications.length}}
+      </span>
+
+    </button>
+
+  </div>
+<div
+
+class="notification-panel"
+
+*ngIf="showNotifications">
+
+<div
+
+*ngFor="let item of notifications"
+
+class="notification-item">
+
+<div>
+
+{{item.message}}
+
+</div>
+
+<small>
+
+{{item.time | date:'shortTime'}}
+
+</small>
+
+</div>
+
+<button
+
+class="btn-secondary"
+
+(click)="clearAll()">
+
+Clear All
+
+</button>
+
+</div>
+
+
+  <!-- Logout -->
+
+  <button
+    class="logout-btn"
+    (click)="logout()">
+
+    Logout
+
+  </button>
+
+
+</header>

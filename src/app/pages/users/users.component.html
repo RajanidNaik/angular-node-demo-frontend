@@ -1,0 +1,202 @@
+<div class="container">
+  <div class="app-card">
+<h2>User List</h2>
+
+<!-- Search & Filters -->
+
+<div class="filter-container">
+
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search Name or Email"
+  [(ngModel)]="search"
+  (input)="onSearch()">
+
+  <select [(ngModel)]="selectedRole" class="form-control">
+
+    <option value="All">
+
+      All Roles
+
+    </option>
+
+    <option value="HR">
+
+      HR
+
+    </option>
+
+    <option value="Manager">
+
+      Manager
+
+    </option>
+
+    <option value="Employee">
+
+      Employee
+
+    </option>
+
+  </select>
+
+  <select [(ngModel)]="selectedStatus" class="form-control">
+
+    <option value="All">
+
+      All Status
+
+    </option>
+
+    <option value="Active">
+
+      Active
+
+    </option>
+
+    <option value="Inactive">
+
+      Inactive
+
+    </option>
+
+  </select>
+
+  <button
+    class="btn-primary"
+    (click)="searchUsers()">
+
+    Search
+
+  </button>
+  <button
+  class="btn-secondary"
+  *ngIf="search"
+  (click)="clearFilters()">
+
+  Clear
+
+</button>
+
+</div>
+
+<br>
+
+<div class="mob-table">
+  <table border="1" class="app-table">
+
+  <tr>
+
+    <th>Name</th>
+
+    <th>Email</th>
+
+    <th>Role</th>
+
+    <th>Status</th>
+
+    <th>Action</th>
+
+  </tr>
+
+  @for (user of users; track user._id) {
+
+    <tr>
+
+      <td>{{ user.name }}</td>
+
+      <td>{{ user.email }}</td>
+
+      <td>{{ user.role }}</td>
+
+      <td>{{ user.status }}</td>
+
+      <td>
+
+        <button
+          class="btn-primary"
+          (click)="openEditModal(user)">
+
+          Edit
+
+        </button>
+
+        &nbsp;
+
+        <button
+          class="btn-danger"
+          (click)="deleteUser()">
+
+          Delete
+
+        </button>
+
+      </td>
+
+    </tr>
+
+  }
+
+</table>
+</div>
+
+<br>
+<button
+  class="btn btn-success btn-primary"
+  (click)="exportUsers()">
+
+  Export Excel
+
+</button>
+<br>
+
+<div class="pagination">
+
+  <button
+    class="btn-secondary"
+    (click)="prevPage()">
+
+    Previous
+
+  </button>
+
+  &nbsp;
+
+  Page {{ page }}
+
+  &nbsp;
+
+  <button
+    class="btn-secondary"
+    (click)="nextPage()">
+
+    Next
+
+  </button>
+
+</div>
+
+<!-- User Modal -->
+
+<div
+  class="modal-backdrop"
+  *ngIf="showModal">
+
+  <div class="modal">
+
+    <app-user-form
+
+      [user]="selectedUser"
+
+      (close)="closeModal()"
+
+      (saved)="userSaved()">
+
+    </app-user-form>
+
+  </div>
+
+</div>
+</div>
+</div>

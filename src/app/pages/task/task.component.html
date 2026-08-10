@@ -1,0 +1,277 @@
+<div class="container">
+
+  <div class="app-card">
+
+    <h2>Tasks</h2>
+
+    <button
+      class="btn-primary"
+      *ngIf="isHR || isManager"
+      (click)="openAddModal()">
+
+      Add Task
+
+    </button>
+
+    <br><br>
+    <div class="filters">
+
+  <input
+
+    type="text"
+    class="form-control"
+
+    placeholder="Search Task"
+
+    [(ngModel)]="search"
+
+    (input)="onSearch()">
+
+  <select
+
+    [(ngModel)]="selectedPriority"
+    class="form-control"
+
+    (change)="searchTasks()">
+
+    <option value="All">All Priority</option>
+
+    <option value="Low">Low</option>
+
+    <option value="Medium">Medium</option>
+
+    <option value="High">High</option>
+
+  </select>
+
+  <select
+
+    [(ngModel)]="selectedStatus"
+    class="form-control"
+    (change)="searchTasks()">
+
+    <option value="All">All Status</option>
+
+    <option value="Pending">Pending</option>
+
+    <option value="In Progress">In Progress</option>
+
+    <option value="Completed">Completed</option>
+
+  </select>
+
+  <select
+
+    *ngIf="!isEmployee"
+
+    [(ngModel)]="selectedEmployee"
+    class="form-control"
+
+    (change)="searchTasks()">
+
+    <option value="All">
+
+      All Employees
+
+    </option>
+
+    <option
+
+      *ngFor="let emp of employees"
+
+      [value]="emp._id">
+
+      {{ emp.name }}
+
+    </option>
+
+  </select>
+
+  <button
+
+    class="btn-secondary"
+    *ngIf="search"
+
+    (click)="clearFilters()">
+
+    Clear
+
+  </button>
+
+</div>
+
+<br>
+<div class="mob-table">
+      <table border="1" class="app-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Title</th>
+
+          <th>Priority</th>
+
+          <th>Status</th>
+
+          <th>Assigned To</th>
+
+          <th>Due Date</th>
+
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let task of tasks">
+
+          <td>{{ task.title }}</td>
+
+          <td>{{ task.priority }}</td>
+<td>
+
+<select
+
+*ngIf="isEmployee"
+
+[(ngModel)]="task.status"
+class="form-control"
+
+(change)="updateStatus(task)">
+
+<option value="Pending">
+
+Pending
+
+</option>
+
+<option value="In Progress">
+
+In Progress
+
+</option>
+
+<option value="Completed">
+
+Completed
+
+</option>
+
+</select>
+
+<span *ngIf="!isEmployee">
+
+{{task.status}}
+
+</span>
+
+</td>
+
+          <td>
+
+            {{ task.assignedTo?.name || 'N/A' }}
+
+          </td>
+
+          <td>
+
+            {{ task.dueDate | date:'mediumDate' }}
+
+          </td>
+
+          <td>
+
+            <button
+              class="btn-primary"
+              [disabled]="!isHR && !isManager"
+              (click)="openEditModal(task)">
+
+              Edit
+
+            </button>&nbsp;
+
+            <button
+              class="btn-danger"
+              [disabled]="!isHR"
+              (click)="openDeleteModal(task._id)">
+
+              Delete
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+</div>
+
+
+    <div class="pagination">
+
+      <button
+        class="btn-secondary"
+        (click)="prevPage()">
+
+        Previous
+
+      </button>
+
+      Page {{ page }}
+
+      <button
+        class="btn-secondary"
+        (click)="nextPage()">
+
+        Next
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Modal -->
+
+<div
+  class="modal-backdrop"
+  *ngIf="showModal">
+
+  <div class="modal">
+
+    <app-task-form
+
+      [task]="selectedTask"
+
+      (close)="closeModal()"
+
+      (saved)="taskSaved()">
+
+    </app-task-form>
+
+  </div>
+
+</div>
+
+<!-- Delete Modal -->
+
+<app-confirmation-modal
+
+  [visible]="showDeleteModal"
+
+  title="Delete Task"
+
+  message="Are you sure you want to delete this task?"
+
+  (confirm)="deleteTask()"
+
+  (cancel)="closeDeleteModal()">
+
+</app-confirmation-modal>
