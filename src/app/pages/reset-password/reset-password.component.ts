@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,12 +22,10 @@ export class ResetPasswordComponent {
   constructor(
 
     private fb: FormBuilder,
-
     private route: ActivatedRoute,
-
     private router: Router,
-
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
 
   ) {}
     ngOnInit(): void {
@@ -86,13 +85,8 @@ export class ResetPasswordComponent {
       this.resetForm.value.confirmPassword
 
     ) {
-
-      alert(
-
-        'Passwords do not match'
-
-      );
-            return;
+      this.toastr.error('Passwords do not match', 'Error');
+      return;
 
     }
 
@@ -111,11 +105,7 @@ export class ResetPasswordComponent {
       .subscribe({
 
         next: () => {
-
-          alert(
-                        'Password Updated Successfully'
-
-          );
+          this.toastr.success('Password Updated Successfully', 'Success');
 
           this.router.navigate([
 
@@ -126,12 +116,7 @@ export class ResetPasswordComponent {
         },
 
         error: (err) => {
-
-          alert(
-
-            err.error.message
-
-          );
+          this.toastr.error(err.error.message, 'Error');
 
         }
 

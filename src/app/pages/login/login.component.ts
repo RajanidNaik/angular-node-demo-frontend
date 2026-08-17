@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   login() {
@@ -62,7 +64,7 @@ export class LoginComponent {
 
       error: () => {
 
-        alert('Invalid credentials');
+        this.toastr.error('Invalid credentials','Error');
 
       }
 

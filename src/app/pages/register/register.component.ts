@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -17,18 +18,19 @@ export class RegisterComponent {
   email = '';
   password = '';
 
-  role = 'Employee';   // ⭐ default role
+  role = 'Employee';   
 
   department = '';
   designation = '';
   phone = '';
   managerId = '';
 
-  adminKey = '';       // ⭐ for HR creation
+  adminKey = '';       
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   register() {
@@ -46,7 +48,6 @@ export class RegisterComponent {
 
     };
 
-    // ⭐ only send adminKey if HR selected
     if (this.role === 'HR') {
       payload.adminKey = this.adminKey;
     }
@@ -57,16 +58,15 @@ export class RegisterComponent {
 
         next: () => {
 
-          alert('Registration Successful');
-
+          this.toastr.success('Registration Successful', 'Success');
           this.router.navigate(['/login']);
 
         },
 
         error: (err) => {
-
-          alert(
-            err.error.message || 'Registration Failed'
+          this.toastr.error(
+            err.error.message || 'Registration Failed',
+            'Error'
           );
 
         }

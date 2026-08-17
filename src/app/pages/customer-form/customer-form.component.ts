@@ -73,12 +73,6 @@ export class CustomerFormComponent
 
     this.customerId =
       this.route.snapshot.paramMap.get('id');
-
-    // if (this.customerId) {
-
-    //   this.loadCustomer();
-
-    // }
       if (this.customer) {
 
     this.customerForm.patchValue({
@@ -94,7 +88,6 @@ export class CustomerFormComponent
   }
 
 ngOnChanges(changes: SimpleChanges): void {
-console.log('ngOnChanges called with changes:', changes);
   // if (!this.customerForm) {
   //   return;
   // }
@@ -116,8 +109,6 @@ console.log('ngOnChanges called with changes:', changes);
 }
 
 setFormValues() {
-  console.log('Setting form values for customer:', this.customer);
-
   this.customerForm.patchValue({
 
     name: this.customer.name,

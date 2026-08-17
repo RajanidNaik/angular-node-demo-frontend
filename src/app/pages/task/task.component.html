@@ -6,7 +6,8 @@
 
     <button
       class="btn-primary"
-      *ngIf="isHR || isManager"
+      [disabled]="!isHR && !isManager"
+      [ngClass]="{'disabled-button': !isHR && !isManager}"
       (click)="openAddModal()">
 
       Add Task
@@ -187,6 +188,7 @@ Completed
             <button
               class="btn-primary"
               [disabled]="!isHR && !isManager"
+              [ngClass]="{'disabled-button': !isHR && !isManager}"
               (click)="openEditModal(task)">
 
               Edit
@@ -196,6 +198,7 @@ Completed
             <button
               class="btn-danger"
               [disabled]="!isHR"
+              [ngClass]="{'disabled-button': !isHR}"
               (click)="openDeleteModal(task._id)">
 
               Delete

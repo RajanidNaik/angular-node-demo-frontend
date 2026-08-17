@@ -1,80 +1,107 @@
 <div class="register-page">
+  <div class="register-container">
+    <!-- Left Side -->
 
-  <div class="register-card">
+    <div class="register-left">
 
-    <h2>Register</h2>
-
-    <!-- Name -->
-    <div class="form-group">
-      <input type="text" [(ngModel)]="name" placeholder="Name">
-    </div>
-
-    <!-- Email -->
-    <div class="form-group">
-      <input type="email" [(ngModel)]="email" placeholder="Email">
-    </div>
-
-    <!-- Password -->
-    <div class="form-group">
-      <input type="password" [(ngModel)]="password" placeholder="Password">
-    </div>
-
-    <!-- Role -->
-    <div class="form-group">
-
-      <select [(ngModel)]="role">
-
-        <option value="Employee">Employee</option>
-        <option value="Manager">Manager</option>
-        <option value="HR">HR</option>
-
-      </select>
+      <img src="/assets/images/Register.png" alt="Register">
 
     </div>
 
-    <!-- Department -->
-    <div class="form-group">
-      <input type="text" [(ngModel)]="department" placeholder="Department">
+    <!-- Right Side -->
+
+    <div class="register-right">
+
+      <!-- <h1>Hello,</h1>
+
+      <h2>Welcome</h2>
+
+      <p>
+        Create an account to continue
+      </p> -->
+      <div class="register-card">
+
+        <h1>Hello,</h1>
+
+        <h2>Welcome</h2>
+
+        <p>
+          Create an account to continue
+        </p>
+        <div class="form-container">
+          <!-- Name -->
+          <div class="form-group">
+            <input type="text" [(ngModel)]="name" placeholder="Name">
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <input type="email" [(ngModel)]="email" placeholder="Email">
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <input type="password" [(ngModel)]="password" placeholder="Password">
+          </div>
+
+          <!-- Role -->
+          <div class="form-group">
+
+            <select [(ngModel)]="role" name="role" required>
+
+              <option value="Employee">Employee</option>
+              <option value="Manager">Manager</option>
+              <option value="HR">HR</option>
+
+            </select>
+
+          </div>
+
+          <!-- Department -->
+          <div class="form-group">
+            <input type="text" [(ngModel)]="department" placeholder="Department">
+          </div>
+
+          <!-- Designation -->
+          <div class="form-group">
+            <input type="text" [(ngModel)]="designation" placeholder="Designation">
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <input type="text" [(ngModel)]="phone" placeholder="Phone">
+          </div>
+
+          <!-- Manager ID (optional) -->
+          <div class="form-group">
+            <input type="text" [(ngModel)]="managerId" placeholder="Manager ID (optional)">
+          </div>
+
+          <!-- HR Secret Key (ONLY if HR selected) -->
+          <div class="form-group" *ngIf="role === 'HR'">
+
+            <input type="password" [(ngModel)]="adminKey" placeholder="HR Secret Key">
+
+          </div>
+        </div>
+
+
+        <!-- Register Button -->
+        <button class="btn-primary" (click)="register()">
+          Register
+        </button>
+
+        <div class="login">
+
+          Already have an account?
+
+          <a routerLink="/login">Login</a>
+
+        </div>
+
+      </div>
+
     </div>
-
-    <!-- Designation -->
-    <div class="form-group">
-      <input type="text" [(ngModel)]="designation" placeholder="Designation">
-    </div>
-
-    <!-- Phone -->
-    <div class="form-group">
-      <input type="text" [(ngModel)]="phone" placeholder="Phone">
-    </div>
-
-    <!-- Manager ID (optional) -->
-    <div class="form-group">
-      <input type="text" [(ngModel)]="managerId" placeholder="Manager ID (optional)">
-    </div>
-
-    <!-- HR Secret Key (ONLY if HR selected) -->
-    <div class="form-group" *ngIf="role === 'HR'">
-
-      <input
-        type="password"
-        [(ngModel)]="adminKey"
-        placeholder="HR Secret Key">
-
-    </div>
-
-    <!-- Register Button -->
-    <button class="btn-primary" (click)="register()">
-      Register
-    </button>
-
-    <div class="login">
-
-      Already have an account?
-
-      <a routerLink="/login">Login</a>
-
-    </div>
-
   </div>
 
 </div>

@@ -243,28 +243,26 @@
   <br>
 <div class="dashboard-grid">
 
-  <div class="app-card" *ngIf="chartSeries.length && user.role === 'HR'">
+
+  <div
+    class="app-card"
+    *ngIf="roleSeries.length"
+  >
 
     <app-charts
       title="Users by Role"
       type="pie"
-      [labels]="chartLabels"
-      [series]="chartSeries">
-    </app-charts>
-
-  </div>
-    <div class="app-card" *ngIf="chartSeries.length && user.role === 'Manager'">
-
-    <app-charts
-      title="Tasks list"
-      type="pie"
-      [labels]="chartLabels"
-      [series]="chartSeries">
+      [labels]="roleLabels"
+      [series]="roleSeries">
     </app-charts>
 
   </div>
 
-  <div class="app-card" *ngIf="prioritySeries.length">
+
+  <div
+    class="app-card"
+    *ngIf="prioritySeries.length"
+  >
 
     <app-charts
       title="Tasks by Priority"
@@ -274,6 +272,22 @@
     </app-charts>
 
   </div>
+
+
+  <div
+    class="app-card"
+    *ngIf="statusSeries.length"
+  >
+
+    <app-charts
+      title="Tasks by Status"
+      type="donut"
+      [labels]="statusLabels"
+      [series]="statusSeries">
+    </app-charts>
+
+  </div>
+
 
 </div>
 </div>

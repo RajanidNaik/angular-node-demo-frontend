@@ -8,6 +8,7 @@ import { ConfirmationModalComponent } from '../../shared/components/confirmation
 import { SearchService } from '../../services/search.service';
 import { Subject } from 'rxjs/internal/Subject';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-customer',
@@ -32,35 +33,45 @@ export class CustomerComponent implements OnInit {
   selectedCustomer: any = null;
   showDeleteModal = false;
 
-selectedCustomerId = '';
-search = '';
-private searchSubject!: Subject<string>;
+  selectedCustomerId = '';
+  search = '';
+  private searchSubject!: Subject<string>;
+  user: any;
 
   constructor(
     private customerService: CustomerService,
-    private searchService: SearchService
-  ) {}
+    private searchService: SearchService,
+    public authService: AuthService,
+  ) { }
 
-ngOnInit() {
+  ngOnInit() {
+    this.getUserRole();
 
-  this.searchSubject =
+    this.searchSubject =
 
-    this.searchService.createDebounce(() => {
+      this.searchService.createDebounce(() => {
 
-      this.page = 1;
+        this.page = 1;
 
-      this.loadCustomers();
+        this.loadCustomers();
 
-    });
+      });
 
-  this.loadCustomers();
+    this.loadCustomers();
 
-}
-onSearch() {
+  }
+  getUserRole() {
+    this.authService.user$
+      .subscribe(user => {
+        this.user = user || {};
+      });
+  }
 
-  this.searchSubject.next(this.search);
+  onSearch() {
 
-}
+    this.searchSubject.next(this.search);
+
+  }
 
   loadCustomers() {
 
@@ -79,33 +90,33 @@ onSearch() {
   }
   clearSearch() {
 
-  this.search = '';
+    this.search = '';
 
-  this.page = 1;
+    this.page = 1;
 
-  this.loadCustomers();
+    this.loadCustomers();
 
-}
-    openAddModal() {
+  }
+  openAddModal() {
 
     this.selectedCustomer = null;
 
     this.showModal = true;
 
   }
-    openEditModal(customer: any) {
+  openEditModal(customer: any) {
 
     this.selectedCustomer = customer;
 
     this.showModal = true;
 
   }
-    closeModal() {
+  closeModal() {
 
     this.showModal = false;
 
   }
-    customerSaved() {
+  customerSaved() {
 
     this.closeModal();
 
@@ -141,19 +152,10 @@ onSearch() {
 
   deleteCustomer() {
 
-    // const confirmDelete =
-    //   confirm(
-    //     'Delete Customer?'
-    //   );
-
-    // if (!confirmDelete) {
-    //   return;
-    // }
-
     this.customerService
       .deleteCustomer(this.selectedCustomerId)
       .subscribe(() => {
-this.showDeleteModal = false;
+        this.showDeleteModal = false;
         this.loadCustomers();
 
       });
@@ -161,15 +163,15 @@ this.showDeleteModal = false;
   }
   openDeleteModal(id: string) {
 
-  this.selectedCustomerId = id;
+    this.selectedCustomerId = id;
 
-  this.showDeleteModal = true;
+    this.showDeleteModal = true;
 
-}
-closeDeleteModal() {
+  }
+  closeDeleteModal() {
 
-  this.showDeleteModal = false;
+    this.showDeleteModal = false;
 
-}
+  }
 
 }

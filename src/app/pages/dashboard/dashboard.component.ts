@@ -26,12 +26,12 @@ export class DashboardComponent implements OnInit {
 
   dashboard: any = {};
   summary: any = {};
-  chartLabels: string[] = [];
-
-  chartSeries: number[] = [];
+  roleLabels: string[] = [];
+  roleSeries: number[] = [];
   priorityLabels: string[] = [];
-
-prioritySeries: number[] = [];
+  prioritySeries: number[] = [];
+  statusLabels: string[] = [];
+  statusSeries: number[] = [];
 
   chartType:
     'pie' |
@@ -97,101 +97,90 @@ prioritySeries: number[] = [];
     this.router.navigate(['/login']);
 
   }
-  getChart() {
+
+getChart(): void {
+
+
     const currentUser = JSON.parse(
       localStorage.getItem('user') || '{}'
     );
 
     this.user = currentUser;
 
-    this.isHR = currentUser.role === 'HR';
-    this.isManager = currentUser.role === 'Manager';
-    this.isEmployee = currentUser.role === 'Employee';
+    this.isHR =
+      currentUser.role === 'HR';
+
+    this.isManager =
+      currentUser.role === 'Manager';
+
+    this.isEmployee =
+      currentUser.role === 'Employee';
+
     this.dashboardService
-
       .getSummary()
+      .subscribe({
 
-      .subscribe((res: any) => {
+        next: (res: any) => {
 
-        this.summary = res;
+          console.log(
+            'Dashboard summary:',
+            res
+          );
 
-        if (this.isHR) {
+          this.summary = res;
 
-          this.chartType = 'pie';
 
-          this.chartLabels =
-
-            res.roleChart.map(
-
-              (x: any) => x.role
-
+          this.roleLabels =
+            (res.roleChart || []).map(
+              (item: any) =>
+                item.role ?? 'Unknown'
             );
 
-          this.chartSeries =
-
-            res.roleChart.map(
-
-              (x: any) => x.count
-
-            );
-              this.priorityLabels =
-    res.priorityChart.map((x: any) => x.priority);
-
-  this.prioritySeries =
-    res.priorityChart.map((x: any) => x.count);
-
-        }
-
-        else if (this.isManager) {
-
-          this.chartType = 'bar';
-
-          this.chartLabels =
-
-            res.taskStatus.map(
-
-              (x: any) => x.status
-
+          this.roleSeries =
+            (res.roleChart || []).map(
+              (item: any) =>
+                Number(item.count ?? 0)
             );
 
-          this.chartSeries =
 
-            res.taskStatus.map(
-
-              (x: any) => x.count
-
+          this.priorityLabels =
+            (res.priorityChart || []).map(
+              (item: any) =>
+                item.priority ?? 'Unknown'
             );
 
-        }
+          this.prioritySeries =
+            (res.priorityChart || []).map(
+              (item: any) =>
+                Number(item.count ?? 0)
+            );
 
-        else {
-
-          this.chartType = 'donut';
-
-          this.chartLabels = [
-
+          this.statusLabels = [
             'Pending',
-
             'In Progress',
-
             'Completed'
-
           ];
 
-          this.chartSeries = [
-
-            res.pending,
-
-            res.inProgress,
-
-            res.completed
-
+          this.statusSeries = [
+            Number(res.pending ?? 0),
+            Number(res.inProgress ?? 0),
+            Number(res.completed ?? 0)
           ];
 
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Error fetching dashboard summary:',
+            error
+          );
 
         }
 
       });
+
   }
+
 
 }

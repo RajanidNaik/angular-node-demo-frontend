@@ -16,8 +16,6 @@ export class NotificationService {
 
 add(message: string) {
 
-  console.log('Notification added:', message);
-
   this.notifications.unshift({
 
     message,
@@ -25,8 +23,6 @@ add(message: string) {
     time: new Date()
 
   });
-
-  console.log(this.notifications);
 
   this.notificationsSubject.next([...this.notifications]);
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,7 +18,8 @@ export class ForgotPasswordComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
 
     this.forgotForm = this.fb.group({
@@ -83,10 +85,9 @@ sendResetLink() {
 
       error: (err) => {
 
-        alert(
-
-          err.error.message
-
+        this.toastr.error(
+          err.error.message,
+          'Error'
         );
 
       }

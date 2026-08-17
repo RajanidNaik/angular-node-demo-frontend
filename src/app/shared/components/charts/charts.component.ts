@@ -51,9 +51,6 @@ export class ChartsComponent
   ngOnChanges(
     changes: SimpleChanges
   ) {
-      console.log('Type:', this.type);
-  console.log('Labels:', this.labels);
-  console.log('Series:', this.series);
 
     if (
       this.type === 'bar'

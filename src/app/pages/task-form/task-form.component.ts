@@ -46,8 +46,6 @@ export class TaskFormComponent
 
   @Output()
   saved = new EventEmitter<void>();
-
-  // ⭐ NEW: employees list
   employees: any[] = [];
 
   constructor(
@@ -84,8 +82,6 @@ export class TaskFormComponent
 
     this.taskId =
       this.route.snapshot.paramMap.get('id');
-
-    // ⭐ LOAD EMPLOYEES
     this.loadEmployees();
 
   }

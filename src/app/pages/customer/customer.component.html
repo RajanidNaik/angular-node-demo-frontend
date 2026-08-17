@@ -6,6 +6,8 @@
 
     <button
       class="btn-primary"
+      [disabled]="user.role !== 'HR'"
+      [ngClass]="{'disabled-button': user.role !== 'HR'}"
       (click)="openAddModal()">
 
       Add Customer

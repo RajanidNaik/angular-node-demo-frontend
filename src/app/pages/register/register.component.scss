@@ -1,34 +1,169 @@
 .register-page {
-  height: 100%;
+  min-height: 100vh;
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
-  padding: 20px;
+
+  padding: 30px;
+
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
 }
 
 .register-card {
-  width: 400px;
   background: white;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+  .form-container {
+    height: 100%;
+    max-height: 260px;
+    overflow: auto;
+    padding-right: 6px;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #2575fc;
+      border-radius: 8px;
+    }
+  }
 }
 
 h2 {
   margin-bottom: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #1976d2;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login {
+  margin-top: 15px;
   text-align: center;
 }
-button{
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #1976d2;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+
+.register-container {
+
+  width: 1100px;
+
+  max-width: 100%;
+
+  background: #fff;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+
 }
-.login {
-    margin-top: 15px;
-    text-align: center;
+
+.register-left {
+
+  flex: 1;
+
+  background: #f7f9ff;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 40px;
+
+}
+
+.register-left img {
+
+  width: 80%;
+
+  max-width: 320px;
+
+}
+
+.register-right {
+
+  width: 510px;
+
+  padding: 30px 60px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+}
+
+.register-right h1 {
+
+  font-size: 32px;
+
+  margin: 0;
+
+  color: #222;
+
+}
+
+.register-right h2 {
+
+  margin-top: 5px;
+
+  margin-bottom: 10px;
+
+  color: #3f51b5;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+}
+
+.register-right p {
+
+  color: #888;
+
+  margin-bottom: 25px;
+
+}
+@media(max-width:900px){
+
+    .register-left{
+
+        display:none;
+
+    }
+
+    .register-right{
+
+        width:100%;
+
+        padding:20px;
+        .register-card{
+          padding: 0px;
+          box-shadow: none;
+          .form-container{
+            max-height: 320px;
+          }
+        }
+
+    }
+
 }
